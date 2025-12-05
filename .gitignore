@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.js
+*.d.ts
+*.js.map
+*.d.ts.map
+
+# Keep source files
+!src/**/*.js
+!mcp-server/**/*.js
+!cli/**/*.js
+
+# But exclude compiled output in those directories
+src/**/*.d.ts
+src/**/*.js.map
+src/**/*.d.ts.map
+mcp-server/**/*.d.ts
+mcp-server/**/*.js.map
+mcp-server/**/*.d.ts.map
+cli/**/*.d.ts
+cli/**/*.js.map
+cli/**/*.d.ts.map
+
+# Generated manifests (these are created dynamically)
+repoforge-manifest.json
+repoforge-manifest.yaml
+
+# Internal documentation
+ARCHITECTURE_COMPLETE.md
+COMPLETION_SUMMARY.md
+CONTEXT_MEMORY_WORKING.md
+FEATURES_COMPLETE.md
+KIRO_*.md
+TEST_KIRO_NOW.md
+HOW_TO_USE.md
+QUICK_START.md
+INSTALLATION_GUIDE.md
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.*.local

@@ -1,0 +1,13 @@
+name: "RepoForge Base Skeleton"
+description: "Lean TypeScript skeleton for APIs or services."
+
+folders:
+  - src
+  - src/routes
+  - src/services
+  - tests
+
+entrypoint: "src/index.ts"
+
+tests:
+  pattern: "**/*.test.ts"

@@ -1,0 +1,18 @@
+id: repoforge-auto-health-check
+description: Automatically run health check when user opens a new session or asks about project health
+trigger:
+  type: message_pattern
+  pattern: "(?i)(health check|how is|how's|project health|code quality|quality check|check quality)"
+actions:
+  - type: mcp_call
+    server: repoforge
+    tool: repoforge_audit_summary
+    args:
+      root: "."
+  - type: reply
+    template: |
+      I ran a health check on your project:
+
+      {{tool_output}}
+
+      Would you like a detailed breakdown of any specific issues?

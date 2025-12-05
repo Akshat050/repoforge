@@ -1,0 +1,50 @@
+{
+  "version": "1.0.0",
+  "lastScanAt": "2025-12-04T04:00:09.157Z",
+  "project": {
+    "type": "backend",
+    "frameworks": [
+      "express"
+    ],
+    "architecture": "layered",
+    "hasTests": true,
+    "hasTypeScript": true,
+    "hasBuildConfig": true,
+    "packageManager": "npm",
+    "confidence": 100
+  },
+  "lastAudit": {
+    "issuesCount": 5,
+    "deepRun": false,
+    "timestamp": "2025-12-04T04:00:09.158Z",
+    "summary": {
+      "ghosts": 2,
+      "curses": 3,
+      "zombies": 0,
+      "critical": 0,
+      "high": 0,
+      "medium": 5,
+      "low": 0
+    }
+  },
+  "recommendations": [
+    "🧿 Fix 3 structural issues for better maintainability"
+  ],
+  "history": [
+    {
+      "timestamp": "2025-12-04T03:38:08.671Z",
+      "command": "doctor",
+      "issuesFound": 5
+    },
+    {
+      "timestamp": "2025-12-04T03:38:42.956Z",
+      "command": "audit",
+      "issuesFound": 5
+    },
+    {
+      "timestamp": "2025-12-04T04:00:09.158Z",
+      "command": "doctor",
+      "issuesFound": 5
+    }
+  ]
+}

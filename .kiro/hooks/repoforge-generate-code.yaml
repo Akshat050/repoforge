@@ -1,0 +1,16 @@
+id: repoforge-generate-code
+description: Trigger code generation when user asks to create or generate something
+trigger:
+  type: message_pattern
+  pattern: "(?i)(generate|create|build|make) (a |an |the )?(component|page|api|route|service|model|util)"
+actions:
+  - type: reply
+    template: |
+      I'll help you generate that! To create the code files, I need to understand what you want to build.
+
+      Could you describe it in more detail? For example:
+      - "Generate a user profile page with avatar upload"
+      - "Create an authentication API with JWT"
+      - "Build a product card component with image and price"
+
+      Once you provide details, I'll use RepoForge to generate framework-appropriate code with tests included.

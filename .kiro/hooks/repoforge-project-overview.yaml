@@ -1,0 +1,21 @@
+id: repoforge-project-overview
+description: Provide project overview when user asks what the project is
+trigger:
+  type: message_pattern
+  pattern: "(?i)(what is this project|explain this project|project overview|what does this do|describe this repo)"
+actions:
+  - type: mcp_call
+    server: repoforge
+    tool: repoforge_audit_summary
+    args:
+      root: "."
+  - type: reply
+    template: |
+      Let me explain this project:
+
+      {{tool_output}}
+
+      This gives you a quick overview. Would you like me to:
+      - Show the detailed architecture and code flow?
+      - Generate a complete manifest for documentation?
+      - Identify areas that need improvement?

@@ -1,0 +1,25 @@
+id: repoforge-detailed-audit
+description: Run detailed audit when user asks for specifics or deep analysis
+trigger:
+  type: message_pattern
+  pattern: "(?i)(detailed audit|deep audit|show (me )?(all|the) issues|what needs fixing|full audit|complete audit)"
+actions:
+  - type: mcp_call
+    server: repoforge
+    tool: repoforge_audit_repo
+    args:
+      root: "."
+  - type: reply
+    template: |
+      Here's the complete audit of your repository:
+
+      {{tool_output}}
+
+      I can help you:
+      - Prioritize which issues to fix first
+      - Generate test files for ghost files
+      - Refactor large files
+      - Fix naming violations
+      - Create an action plan
+
+      What would you like to tackle first?

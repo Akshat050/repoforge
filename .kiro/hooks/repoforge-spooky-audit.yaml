@@ -1,0 +1,16 @@
+id: repoforge-spooky-audit
+description: Run a RepoForge audit when the user asks for a spooky audit or spook check.
+trigger:
+  type: message_pattern
+  pattern: "(?i)spooky audit|spook check|repoforge audit"
+actions:
+  - type: mcp_call
+    server: repoforge
+    tool: repoforge_audit_summary
+    args:
+      root: "."
+  - type: reply
+    template: |
+      I ran RepoForge on this repo. Here is the spooky summary:
+
+      {{tool_output}}

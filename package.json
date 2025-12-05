@@ -1,0 +1,45 @@
+{
+  "name": "repoforge",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/core/index.js",
+  "description": "Smart repository auditor for JavaScript/TypeScript projects - detects ghosts, curses, and zombies in your codebase",
+  "scripts": {
+    "build": "tsc -p .",
+    "dev:cli": "ts-node ./cli/index.ts",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "bin": {
+    "repoforge": "./dist/cli/index.js"
+  },
+  "keywords": [
+    "audit",
+    "code-quality",
+    "typescript",
+    "javascript",
+    "linter",
+    "static-analysis",
+    "repository",
+    "testing",
+    "architecture",
+    "framework-detection"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.23.0",
+    "@types/node": "^24.10.1",
+    "js-yaml": "^4.1.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/js-yaml": "^4.0.9",
+    "fast-check": "^4.3.0",
+    "vitest": "^4.0.15"
+  }
+}

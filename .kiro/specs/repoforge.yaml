@@ -1,0 +1,355 @@
+id: repoforge
+name: RepoForge – Intelligent Repository Auditor & Code Generator
+version: 1.0.0
+summary: >
+  RepoForge is a comprehensive codebase analysis and generation tool that audits repositories
+  for structural issues (ghosts, curses, zombies), generates framework-aware code, and maintains
+  context memory across sessions. It understands 15+ frameworks and provides actionable recommendations.
+
+description: >
+  RepoForge combines static analysis, code generation, and AI-powered insights to help developers
+  understand, improve, and build better codebases. It detects missing tests, structural problems,
+  security issues, and provides framework-specific recommendations. With context memory, it never
+  forgets your project structure and tracks progress over time.
+
+goals:
+  - Help junior developers understand repository structure and missing tests in minutes
+  - Give senior engineers fast structural health checks before code reviews
+  - Provide consistent skeleton generation for new services and tests
+  - Track code quality improvements over time with context memory
+  - Generate framework-aware code with proper structure and tests
+  - Identify security vulnerabilities and critical issues immediately
+
+capabilities:
+  cli:
+    commands:
+      - name: init
+        description: Scaffold a minimal src/ + tests/ skeleton for a service-oriented repo
+        usage: repoforge init
+        
+      - name: audit
+        description: Fast structural audit - scans for ghosts, curses, and zombies
+        usage: repoforge audit
+        flags:
+          - name: --deep
+            description: Include deep code analysis (complexity, security, dead code)
+        
+      - name: doctor
+        description: Comprehensive health check with scores and actionable recommendations
+        usage: repoforge doctor
+        output: >
+          - Overall health score (0-100)
+          - Section scores (Structure, Testing, Code Quality, Documentation, Architecture)
+          - Quick wins identification
+          - Prioritized action plan
+        
+      - name: map
+        description: Human-readable summary of repository structure and flow
+        usage: repoforge map
+        output: >
+          - Project explanation in plain language
+          - Technical stack details
+          - Architecture pattern
+          - Directory structure
+          - Entry points and API routes
+        
+      - name: generate
+        description: AI-powered code generation from natural language prompts
+        usage: repoforge generate "user login page"
+        features:
+          - Framework-aware (React, Next.js, Express, etc.)
+          - Includes tests automatically
+          - Follows project conventions
+          - TypeScript or JavaScript based on project
+        
+      - name: manifest
+        description: Generate machine-readable manifest (JSON/YAML)
+        usage: repoforge manifest --json
+        flags:
+          - name: --json
+            description: Output in JSON format (default)
+          - name: --yaml
+            description: Output in YAML format
+        
+      - name: kiro-setup
+        description: One-command setup for Kiro IDE integration
+        usage: repoforge kiro-setup
+        creates:
+          - .kiro/settings/mcp.json
+          - .kiro/hooks/repoforge-spooky-audit.yaml
+          - .kiro/specs/repoforge.yaml
+          - .kiro/steering/repoforge.md
+
+  mcp:
+    server: repoforge
+    tools:
+      - name: repoforge_audit_repo
+        description: >
+          Full audit with detailed issue list for each file. Best for deep analysis in chat.
+          Returns complete breakdown of all ghosts, curses, and zombies with file paths,
+          severity levels, and specific recommendations.
+        parameters:
+          - name: root
+            type: string
+            optional: true
+            description: Repository root path (defaults to current working directory)
+        returns: >
+          - Project profile (type, frameworks, architecture)
+          - Human-friendly explanation
+          - Complete issue list with file paths
+          - Smart recommendations
+          - Issue summary by type and severity
+        
+      - name: repoforge_audit_summary
+        description: >
+          Quick health check summary. Best for fast answers and initial assessment.
+          Returns high-level overview without overwhelming detail.
+        parameters:
+          - name: root
+            type: string
+            optional: true
+            description: Repository root path (defaults to current working directory)
+        returns: >
+          - Project type and frameworks
+          - Total issue count
+          - Breakdown by type (ghosts, curses, zombies)
+          - Top 3 recommendations
+        
+      - name: repoforge_generate_code
+        description: >
+          AI-powered code generation from natural language prompts.
+          Generates framework-aware code with proper structure, tests, and conventions.
+        parameters:
+          - name: prompt
+            type: string
+            required: true
+            description: What to generate (e.g., 'user authentication API', 'product card component')
+          - name: root
+            type: string
+            optional: true
+            description: Target directory (defaults to current working directory)
+        returns: >
+          - List of files that would be generated
+          - Code structure explanation
+          - Framework-specific implementation details
+          - Next steps for implementation
+        
+      - name: repoforge_generate_manifest
+        description: >
+          Generate machine-readable manifest describing entire repository.
+          Includes structure, dependencies, languages, quality metrics, and documentation status.
+        parameters:
+          - name: root
+            type: string
+            optional: true
+            description: Repository root path (defaults to current working directory)
+          - name: format
+            type: string
+            optional: true
+            enum: [json, yaml]
+            description: Output format (json or yaml, defaults to json)
+        returns: >
+          - Complete repository metadata
+          - Language statistics
+          - Dependency analysis
+          - Module structure
+          - Quality metrics
+          - Documentation status
+
+features:
+  context_memory:
+    description: >
+      RepoForge maintains state in .repoforge/state.json to remember project context
+      across sessions. Never forgets project type, frameworks, or audit history.
+    stores:
+      - Project type (backend, frontend, fullstack, library, monorepo)
+      - Frameworks detected (React, Next.js, Express, etc.)
+      - Architecture pattern (MVC, Layered, Clean, Modular)
+      - Last audit results and timestamp
+      - Command history with timestamps
+      - Recommendations
+    benefits:
+      - Consistent responses across CLI, MCP, and Hooks
+      - Track progress over time
+      - No need to re-detect project structure
+      - Context-aware recommendations
+
+  framework_detection:
+    description: Automatically detects 15+ frameworks and adapts rules accordingly
+    supported:
+      frontend:
+        - React
+        - Next.js
+        - Vue
+        - Nuxt
+        - Angular
+        - Svelte
+      backend:
+        - Express
+        - Fastify
+        - NestJS
+      build_tools:
+        - Vite
+        - Webpack
+    
+  issue_types:
+    ghosts:
+      description: Files missing test coverage
+      severity: medium
+      detection: >
+        Scans src/, lib/, core/ for code files without matching .test.* or .spec.* files
+      recommendation: Add tests for critical business logic and API endpoints first
+      
+    curses:
+      description: Structural and code quality issues
+      types:
+        - Naming violations (camelCase, PascalCase, snake_case)
+        - Monolithic files (>500 lines, context-aware thresholds)
+        - High complexity (cyclomatic complexity >50)
+        - Tight coupling (>20 imports)
+        - Console.log in production
+        - Empty catch blocks
+        - Hardcoded credentials (CRITICAL security issue)
+        - Excessive 'any' types in TypeScript
+        - Mixed frontend/backend layers
+      severity: low to critical (depends on type)
+      
+    zombies:
+      description: Misplaced code and dead code
+      types:
+        - Files outside proper directories
+        - Dead code (exported but never imported)
+        - Unused variables and functions
+        - Broken import paths
+      severity: low to medium
+      detection: Framework-aware (knows Next.js app/, Express routes/)
+
+  code_generation:
+    description: AI-powered code generation with framework awareness
+    generates:
+      - React/Next.js components with tests
+      - Express/Fastify API routes
+      - Service classes with CRUD operations
+      - Data models with TypeScript types
+      - Utility functions
+    features:
+      - Includes tests automatically
+      - Follows project conventions
+      - TypeScript or JavaScript based on project
+      - Framework-specific structure
+      - Best practices applied
+
+usage:
+  typical_flows:
+    - title: New developer joining a large repo
+      steps:
+        - Run `repoforge map` to understand project structure
+        - Run `repoforge audit` to see what needs improvement
+        - Ask Kiro to call `repoforge_audit_repo` for detailed analysis
+        - Use recommendations to create action plan
+        
+    - title: Senior dev reviewing codebase
+      steps:
+        - Ask Kiro to run `repoforge_audit_summary` for quick overview
+        - Use summary to decide where to focus code review
+        - Run `repoforge audit --deep` for security and complexity analysis
+        - Generate action plan based on findings
+        
+    - title: Building new feature
+      steps:
+        - Run `repoforge generate "feature description"`
+        - Review generated structure
+        - Use CLI to create files: `repoforge generate "..."`
+        - Run `repoforge audit` to verify quality
+        
+    - title: Improving code quality
+      steps:
+        - Run `repoforge doctor` for comprehensive health check
+        - Identify quick wins
+        - Fix critical issues first
+        - Run `repoforge audit` to track progress
+        - Repeat until score improves
+        
+    - title: Setting up Kiro IDE
+      steps:
+        - Run `repoforge kiro-setup` in project root
+        - Restart Kiro IDE or reconnect MCP servers
+        - Try "Run a spooky audit" in chat
+        - Use MCP tools for AI-assisted development
+
+integration:
+  kiro_ide:
+    setup: Run `repoforge kiro-setup` for automatic configuration
+    hooks:
+      - trigger: "spooky audit|spook check|repoforge audit"
+        action: Calls repoforge_audit_summary
+        response: Formatted audit summary
+    steering: Comprehensive AI guidance in .kiro/steering/repoforge.md
+    specs: This file provides tool documentation
+    
+  ci_cd:
+    github_actions: |
+      - name: RepoForge Quality Check
+        run: npx repoforge audit --deep
+    
+    gitlab_ci: |
+      repoforge:
+        script:
+          - npx repoforge audit --deep
+    
+    pre_commit: |
+      #!/bin/sh
+      npx repoforge audit || exit 1
+
+best_practices:
+  - Run `repoforge audit` before every commit
+  - Use `repoforge doctor` weekly to track progress
+  - Run `repoforge audit --deep` in CI/CD pipelines
+  - Use `repoforge generate` for consistent code structure
+  - Let context memory track your improvements over time
+  - Fix critical security issues (hardcoded credentials) immediately
+  - Prioritize: Security > Tests > Structure > Style
+
+examples:
+  cli:
+    - command: repoforge audit
+      description: Quick structural audit
+      
+    - command: repoforge audit --deep
+      description: Deep analysis including security and complexity
+      
+    - command: repoforge doctor
+      description: Comprehensive health check with scores
+      
+    - command: repoforge generate "user authentication API"
+      description: Generate auth API with tests
+      
+    - command: repoforge manifest --json
+      description: Create JSON manifest
+      
+    - command: repoforge kiro-setup
+      description: Setup Kiro IDE integration
+  
+  mcp:
+    - query: "Audit this repository"
+      tool: repoforge_audit_repo
+      response: Detailed analysis with all issues
+      
+    - query: "Quick health check"
+      tool: repoforge_audit_summary
+      response: High-level overview
+      
+    - query: "Generate a login page"
+      tool: repoforge_generate_code
+      response: Generated code structure
+      
+    - query: "Create project documentation"
+      tool: repoforge_generate_manifest
+      response: Complete manifest
+
+metadata:
+  author: RepoForge Team
+  license: ISC
+  repository: https://github.com/yourusername/repoforge
+  documentation: See README.md and FEATURES_COMPLETE.md
+  support: Open an issue on GitHub

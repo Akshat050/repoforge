@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "repoforge": {
+      "command": "node",
+      "args": ["./dist/mcp-server/index.js"],
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "repoforge_audit_repo",
+        "repoforge_audit_summary",
+        "repoforge_generate_code",
+        "repoforge_generate_manifest"
+      ],
+      "disabledTools": [],
+      "description": "RepoForge - Intelligent repository auditor with context memory. Detects ghosts (missing tests), curses (structural issues), and zombies (misplaced code). Supports 15+ frameworks.",
+      "metadata": {
+        "version": "1.0.0",
+        "capabilities": [
+          "audit",
+          "code-generation",
+          "manifest-generation",
+          "context-memory"
+        ],
+        "frameworks": [
+          "React",
+          "Next.js",
+          "Vue",
+          "Nuxt",
+          "Angular",
+          "Svelte",
+          "Express",
+          "Fastify",
+          "NestJS"
+        ]
+      }
+    }
+  }
+}
