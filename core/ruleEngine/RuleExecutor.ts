@@ -5,7 +5,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { RuleRegistry } from './RuleRegistry';
+import { RuleRegistry } from './RuleRegistry.js';
 import {
   Rule,
   RuleContext,
@@ -13,10 +13,10 @@ import {
   RuleEngineResult,
   Violation,
   Severity
-} from './types';
-import { RepoMap, ProjectProfile } from '../types';
-import { shouldExcludeFile } from './fileFilter';
-import { processInParallel } from './parallelProcessor';
+} from './types.js';
+import { RepoMap, ProjectProfile } from '../types.js';
+import { shouldExcludeFile } from './fileFilter.js';
+import { processInParallel } from './parallelProcessor.js';
 
 export class RuleExecutor {
   private readonly severityOrder: Severity[] = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW', 'SUGGESTION'];

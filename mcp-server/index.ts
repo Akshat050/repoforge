@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { z } from "zod";
 import * as path from "path";
 import { fileURLToPath } from "url";
@@ -224,11 +226,18 @@ server.tool(
 
 // Connect via stdio (required by Kiro)
 async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
+  try {
+    const transport = new StdioServerTransport();
+    await server.connect(transport);
+    console.error("[RepoForge MCP] Server started successfully");
+  } catch (err) {
+    console.error("[RepoForge MCP] Failed to start:", err);
+    throw err;
+  }
 }
 
 main().catch((err) => {
   console.error("[RepoForge MCP] Fatal error:", err);
+  console.error("[RepoForge MCP] Stack:", err.stack);
   process.exit(1);
 });
