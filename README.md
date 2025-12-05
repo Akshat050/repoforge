@@ -33,7 +33,26 @@ RepoForge automatically detects your project type (React, Next.js, Express, etc.
 - 📊 **Smart Filtering** - Filter by severity, category, or framework
 - 🎯 **Framework-Aware** - Rules adapt to React, Node.js, and other frameworks
 
-## 📦 Installation
+## � Gettaing Started (No API Keys Required!)
+
+RepoForge is a **100% local tool** - no API keys, no sign-ups, no external services needed. Just install and run!
+
+### Quick Start (3 Steps)
+
+```bash
+# 1. Install globally
+npm install -g repoforge
+
+# 2. Navigate to your project
+cd /path/to/your/project
+
+# 3. Run your first audit
+repoforge audit
+```
+
+That's it! RepoForge will analyze your code and show you issues with severity levels.
+
+## 📦 Installation Options
 
 ### Option 1: Global Installation (Recommended)
 Install once, use anywhere:
@@ -71,23 +90,29 @@ npm install --save-dev repoforge
 npm run audit
 ```
 
-## 🚀 Quick Start
+## � QCommon Use Cases
 
 ```bash
-# 1. Install (choose one method above)
-npm install -g repoforge
-
-# 2. Go to your project
-cd /path/to/your/project
-
-# 3. Run your first audit
+# Basic audit - find ghosts, curses, and zombies
 repoforge audit
 
-# 4. See detailed overview
+# Deep audit - includes code quality, security, complexity
+repoforge audit --deep
+
+# Show only critical issues
+repoforge audit --min-severity CRITICAL
+
+# Fail CI/CD on high severity issues
+repoforge audit --fail-on-severity HIGH
+
+# Get project overview and architecture
 repoforge map
 
-# 5. Generate code with AI
+# Generate code with AI
 repoforge generate "homepage for mobile shop"
+
+# Create repository manifest
+repoforge manifest --json
 ```
 
 ## 🚀 Usage
@@ -472,6 +497,26 @@ Built for the Kiroween hackathon! The spooky terminology makes code quality issu
 - **Ghosts** haunt your repo when tests are missing
 - **Curses** plague your code with structural problems
 - **Zombies** shamble around outside their proper directories
+
+## ❓ FAQ
+
+### Do I need API keys or external services?
+**No!** RepoForge runs 100% locally on your machine. No API keys, no sign-ups, no external dependencies. The "API keys" you see in test files are fake examples used to verify that RepoForge can detect hardcoded secrets in *other people's code*.
+
+### Does it work offline?
+**Yes!** RepoForge is a static analysis tool that works completely offline.
+
+### What languages does it support?
+Currently JavaScript and TypeScript. Support for more languages coming soon!
+
+### Can I use it in CI/CD?
+**Absolutely!** RepoForge is designed for CI/CD integration. Use `--fail-on-severity` to control when builds should fail.
+
+### How do I write custom rules?
+See the [Rule Authoring Guide](./docs/RULE_AUTHORING_GUIDE.md) for detailed instructions on creating custom rules for your team.
+
+### Is it free?
+**Yes!** RepoForge is open source and completely free to use.
 
 ## 📝 License
 
