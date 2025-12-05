@@ -28,16 +28,21 @@ cli/**/*.d.ts.map
 repoforge-manifest.json
 repoforge-manifest.yaml
 
-# Internal documentation
+# Internal documentation (temporary files)
 ARCHITECTURE_COMPLETE.md
 COMPLETION_SUMMARY.md
 CONTEXT_MEMORY_WORKING.md
 FEATURES_COMPLETE.md
-KIRO_*.md
+KIRO_INTEGRATION_*.md
+KIRO_SETUP_*.md
+KIRO_DIRECTORY_EXPLAINED.md
 TEST_KIRO_NOW.md
 HOW_TO_USE.md
 QUICK_START.md
 INSTALLATION_GUIDE.md
+
+# But keep user-facing Kiro documentation
+!KIRO_CHAT_PROMPTS.md
 
 # IDE
 .vscode/

@@ -356,17 +356,39 @@ repoforge help
    🏗️ Consider splitting large components into smaller, focused modules
 ```
 
-## 🔧 MCP Server Integration
+## 🔧 MCP Server Integration (Kiro IDE)
 
-RepoForge includes an MCP server for integration with AI coding assistants like Kiro IDE:
+RepoForge includes an MCP server for seamless integration with AI coding assistants like Kiro IDE. Just talk to Kiro in natural language!
 
-### Tools Available:
+### Quick Start with Kiro:
+
+1. **Clone this repo** (includes `.kiro/settings/mcp.json` pre-configured)
+2. **Build RepoForge**: `npm run build`
+3. **Open any project in Kiro**
+4. **Chat with Kiro**:
+   - "Audit this repository"
+   - "Generate a user login page"
+   - "Show me security issues"
+   - "Create a manifest for this project"
+
+### Available MCP Tools:
 - `repoforge_audit_repo` - Full detailed audit with smart recommendations
 - `repoforge_audit_summary` - Quick health check summary
 - `repoforge_generate_code` - AI-powered code generation from prompts
 - `repoforge_generate_manifest` - Generate repository manifest (JSON/YAML)
 
-### Setup in Kiro IDE:
+### 💬 Chat Prompts Guide
+
+See **[KIRO_CHAT_PROMPTS.md](./KIRO_CHAT_PROMPTS.md)** for 50+ example prompts including:
+- "Audit this repo and show me critical issues"
+- "Generate a REST API for user management"
+- "Check this codebase for security vulnerabilities"
+- "Create a dashboard component with charts"
+- "What's the health status of this repository?"
+
+### Manual Setup (if needed):
+If you're setting up RepoForge MCP in a different project:
+
 1. Add to `.kiro/settings/mcp.json`:
 ```json
 {
@@ -380,11 +402,6 @@ RepoForge includes an MCP server for integration with AI coding assistants like 
 ```
 
 2. Restart Kiro or reconnect MCP servers
-
-3. Use in chat:
-   - "Audit this repository"
-   - "Generate a user login page"
-   - "Create a manifest for this project"
 
 ## 🔧 Custom Rules
 
