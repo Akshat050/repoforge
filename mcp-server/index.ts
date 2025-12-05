@@ -7,31 +7,9 @@ import { scanRepo } from "../core/fileScanner.js";
 import { auditRepo, smartAuditRepo } from "../core/auditor.js";
 import type { RepoMap, Issue, AuditResult } from "../core/types.js";
 
-// ES module equivalent of __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Compute SDK root based on this file's location:
-// dist/mcp-server/index.js -> project root -> node_modules/@modelcontextprotocol/sdk
-const sdkRoot = path.join(
-  __dirname,
-  "..",        // dist/
-  "..",        // project root
-  "node_modules",
-  "@modelcontextprotocol",
-  "sdk"
-);
-
-// Dynamic import for CommonJS modules
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-
-const { McpServer } = require(
-  path.join(sdkRoot, "dist", "cjs", "server", "mcp.js")
-);
-const { StdioServerTransport } = require(
-  path.join(sdkRoot, "dist", "cjs", "server", "stdio.js")
-);
+// Import MCP SDK
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 // Create MCP server
 const server = new McpServer({
