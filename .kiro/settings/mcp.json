@@ -2,7 +2,7 @@
   "mcpServers": {
     "repoforge": {
       "command": "node",
-      "args": ["./dist/mcp-server/index.js"],
+      "args": ["D:/repoforge/dist/mcp-server/index.js"],
       "env": {
         "NODE_ENV": "production"
       },
