@@ -21,5 +21,12 @@
     "core",
     "cli",
     "mcp-server"
+  ],
+  
+  // Exclude test files from build
+  "exclude": [
+    "**/*.test.ts",
+    "node_modules",
+    "dist"
   ]
 }

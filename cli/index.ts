@@ -15,7 +15,7 @@ import { generateManifest, manifestToJSON, manifestToYAML } from '../core/manife
 import { runDoctor } from '../core/doctor.js';
 import { loadState, saveState, createState, updateStateWithAudit, getContextSummary } from '../core/state.js';
 import { RuleRegistry } from '../core/ruleEngine/RuleRegistry.js';
-import { loadConfig } from '../core/ruleEngine/ConfigLoader.js';
+import { ConfigLoader } from '../core/ruleEngine/ConfigLoader.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -1051,7 +1051,7 @@ function handleRulesList(): void {
   const root = process.cwd();
   
   // Load configuration to get disabled rules
-  const config = loadConfig(root);
+  const config = ConfigLoader.loadConfig(root);
   const disabledRuleIds = config.disabledRules || [];
   
   // Create registry and load all built-in rules
