@@ -12,8 +12,15 @@
     "prepublishOnly": "npm run build"
   },
   "bin": {
-    "repoforge": "./dist/cli/index.js"
+    "repoforge": "./dist/cli/index.js",
+    "repoforge-mcp": "./dist/mcp-server/index.js"
   },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE",
+    ".kiro/**/*"
+  ],
   "keywords": [
     "audit",
     "code-quality",

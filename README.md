@@ -360,16 +360,55 @@ repoforge help
 
 RepoForge includes an MCP server for seamless integration with AI coding assistants like Kiro IDE. Just talk to Kiro in natural language!
 
-### Quick Start with Kiro:
+### Quick Start with Kiro (Use in All Projects):
 
-1. **Clone this repo** (includes `.kiro/settings/mcp.json` pre-configured)
-2. **Build RepoForge**: `npm run build`
-3. **Open any project in Kiro**
+**Option 1: Automated Setup (Recommended)**
+```bash
+# Clone and setup
+git clone https://github.com/Akshat050/repoforge.git
+cd repoforge
+npm install
+
+# Run setup script
+# On Windows:
+setup-global-mcp.bat
+
+# On Mac/Linux:
+chmod +x setup-global-mcp.sh
+./setup-global-mcp.sh
+```
+
+**Option 2: Manual Setup**
+1. **Clone and build**: 
+   ```bash
+   git clone https://github.com/Akshat050/repoforge.git
+   cd repoforge
+   npm install
+   npm run build
+   npm install -g .
+   ```
+
+2. **Configure globally** - Create `~/.kiro/settings/mcp.json`:
+   ```json
+   {
+     "mcpServers": {
+       "repoforge": {
+         "command": "npx",
+         "args": ["-y", "repoforge-mcp"]
+       }
+     }
+   }
+   ```
+
+3. **Restart Kiro** and open any project
+
 4. **Chat with Kiro**:
    - "Audit this repository"
    - "Generate a user login page"
    - "Show me security issues"
    - "Create a manifest for this project"
+
+See **[KIRO_GLOBAL_SETUP.md](./KIRO_GLOBAL_SETUP.md)** for detailed instructions.
 
 ### Available MCP Tools:
 - `repoforge_audit_repo` - Full detailed audit with smart recommendations
