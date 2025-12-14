@@ -584,4 +584,4 @@ Issues and pull requests welcome!
 
 ## 🏆 Hackathon Project
 
-Created for Kiroween 2024 - Frankenstein Category
+Created for Kiroween 2025 - Frankenstein Category
